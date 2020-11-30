@@ -12,6 +12,11 @@ __That's so draft.__
 from sneact import Sneact, s, _
 from sneact.html import div, p, img
 
+scope = {
+    "title": "Tiger",
+    "subtitle": "About tigers",
+    "image": '"tiger.png"',
+}
 home_page = (+Sneact(scope)
     <<div>>_
         <<p>> s.title <<-p>>_
