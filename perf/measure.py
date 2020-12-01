@@ -15,23 +15,16 @@ for perf_file in perf_dir.glob("perf_*.py"):
         data = file.read()
     if "#?" not in data:
         raise RuntimeError(
-            "Magic '#?' not found in %s." \
-            "'#?' used to divide setup and measure." \
-            % perf_file
+            "Magic '#?' not found in %s."
+            "'#?' used to divide setup and measure." % perf_file
         )
     setup, measure = data.split("#?")
     result = timeit.repeat(
-        measure,
-        setup=setup,
-        number=REPEAT,
-        repeat=max(100, REPEAT_FULL)
+        measure, setup=setup, number=REPEAT, repeat=max(100, REPEAT_FULL)
     )
     quantiles = statistics.quantiles(result, n=10)
     quantiles = [round(q / max(result), 1) * 10 for q in quantiles]
-    graph = [
-        f"  {n*10}% " + ("-" * int(q))
-        for n, q in enumerate(quantiles, start=1)
-    ]
+    graph = [f"  {n*10}% " + ("-" * int(q)) for n, q in enumerate(quantiles, start=1)]
     print(
         perf_file,
         " min is %.2fns" % ((min(result) / (REPEAT * REPEAT_FULL)) / nano),
@@ -40,5 +33,5 @@ for perf_file in perf_dir.glob("perf_*.py"):
         "      0--------9",
         *graph,
         sep="\n",
-        end="\n===\n\n"
+        end="\n===\n\n",
     )
