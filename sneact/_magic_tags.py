@@ -115,6 +115,8 @@ class Template:
                     nested = nested.compile().as_html(sneact)
                 elif isinstance(nested, Template):
                     nested = nested.as_html(sneact)
+                if callable(nested):
+                    nested = nested()
                 html_code = html_code + str(nested)
             else:
                 html_code = html_code + segment
