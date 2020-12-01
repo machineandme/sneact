@@ -85,6 +85,7 @@ class Template:
                 self.sneact = segment
             elif (
                 hasattr(segment, "_condition")
+                or hasattr(segment, "_loop")
                 or hasattr(segment, "value_placeholder")
             ):
                 self.segments.append(last_segment)
@@ -117,6 +118,8 @@ class Template:
                 if segment.evaluate(sneact):
                     then = segment.then.as_html(sneact)
                     html_code = html_code + then
+            elif hasattr(segment, "_loop"):
+                html_code = html_code + segment.do(sneact)
             elif hasattr(segment, "value_placeholder"):
                 nested = segment(sneact)
                 if isinstance(nested, MagicHTMLTag):
