@@ -21,3 +21,8 @@ class When(MagicHTMLTag):
     def __matmul__(self, other):
         del other
         raise ValueError("You cant chain 'when' conditions.")
+
+
+class WhenNot(When):
+    def evaluate(self, scope):
+        return not self._on(scope)

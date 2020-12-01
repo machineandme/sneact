@@ -66,3 +66,21 @@ def conditions_expected_results():
         )
         + "\n"
     )
+
+@fixture
+def not_conditions_expected_results():
+    return (
+        "\n".join(
+            (
+                "<div>",
+                "<p>Tiger</p>",
+                "<p>About tigers</p>",
+                "<div>",
+                "<p>Hello not tigers. We love Tigers.</p>",
+                '<img src="tiger.png">',
+                "</div>",
+                "</div>",
+            )
+        )
+        + "\n"
+    )
