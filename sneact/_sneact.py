@@ -15,5 +15,3 @@ class Sneact(MagicHTMLTag):
 
     def update(self, scope):
         self._scope.update(scope)
-
-    __pos__ = magic_html_mod_method("")

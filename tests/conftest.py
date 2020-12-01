@@ -48,3 +48,21 @@ def nested_expected_results():
         )
         + "\n"
     )
+
+
+@fixture
+def conditions_expected_results():
+    return (
+        "\n".join(
+            (
+                "<div>",
+                "<p>Tiger</p>",
+                "<p>About tigers</p>",
+                "<div>",
+                '<img src="tiger.png">',
+                "</div>",
+                "</div>",
+            )
+        )
+        + "\n"
+    )

@@ -5,8 +5,8 @@ from sneact._magic_tags import (
     magic_html_mod_method,
 )
 
-# fmt: off
 
+# fmt: off
 
 def test_smoke_sneact(smoke_sneact_expected_results):
 	from sneact.html import div, p, img

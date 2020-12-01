@@ -5,8 +5,8 @@ from sneact._magic_tags import (
     magic_html_mod_method,
 )
 
-# fmt: off
 
+# fmt: off
 
 def dummy_tiger_helloer():
     return str.join(" ", ["Hello tigers.", "We love Tigers."])

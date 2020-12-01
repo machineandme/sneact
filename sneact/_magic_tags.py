@@ -71,6 +71,8 @@ class MagicHTMLTag:
     __rshift__ = magic_html_chain_method(">")
     __truediv__ = magic_html_chain_method("/")
     __pow__ = magic_html_chain_method("")
+    __matmul__ = magic_html_chain_method("")
+    __pos__ = magic_html_mod_method("")
     __neg__ = magic_html_mod_method("/")
 
 
@@ -81,15 +83,21 @@ class Template:
         for segment in compileable.segments:
             if hasattr(segment, "_sneact"):
                 self.sneact = segment
-            if isinstance(segment, MagicHTMLTag):
-                last_segment = last_segment + segment.token
-            elif hasattr(segment, "value_placeholder"):
+            elif (
+                hasattr(segment, "_condition")
+                or hasattr(segment, "value_placeholder")
+            ):
                 self.segments.append(last_segment)
                 self.segments.append(segment)
                 last_segment = ""
+            elif isinstance(segment, MagicHTMLTag):
+                last_segment = last_segment + segment.token
             else:
                 last_segment = last_segment + segment
         self.segments.append(last_segment)
+
+    def compile(self):
+        return self
 
     def as_html(self, data=None):
         if data is None:
@@ -105,7 +113,11 @@ class Template:
                 sneact.update(data._scope)
         html_code = ""
         for segment in self.segments:
-            if hasattr(segment, "value_placeholder"):
+            if hasattr(segment, "_condition"):
+                if segment.evaluate(sneact):
+                    then = segment.then.as_html(sneact)
+                    html_code = html_code + then
+            elif hasattr(segment, "value_placeholder"):
                 nested = segment(sneact)
                 if isinstance(nested, MagicHTMLTag):
                     warnings.warn(
