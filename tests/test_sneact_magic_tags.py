@@ -58,6 +58,7 @@ def test_nested(nested_expected_results):
 	    	**s.footer
 	    <<-footer>>_
 	)
+	page = page.compile()
 	header = (+Sneact(scope)
 	    <<h1>> "Page" <<-h1>>_
 	)
@@ -66,5 +67,5 @@ def test_nested(nested_expected_results):
 	    <<p>> "Copyright Kiselev Nikolay 2020" <<-p>>_
 	)
 	scope["footer"] = footer.compile()
-	result = page.compile().as_html()
+	result = page.as_html()
 	assert result == nested_expected_results

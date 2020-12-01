@@ -13,4 +13,7 @@ class Sneact(MagicHTMLTag):
         self._scope = scope
         super().__init__("")
 
+    def update(self, scope):
+        self._scope.update(scope)
+
     __pos__ = magic_html_mod_method("")
