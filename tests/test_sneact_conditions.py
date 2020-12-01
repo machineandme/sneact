@@ -1,4 +1,5 @@
-from sneact import Sneact, s, when, when_not, then, _
+from sneact import Sneact, s, _
+from sneact.cond import when, when_not, then
 from sneact.html import div, p, img
 
 
