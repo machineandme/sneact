@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sneact"
-version = "0.0.6"
+version = "0.1.0"
 description = "Sneact is a python library for building user interfaces"
 readme = "readme.md"
 authors = ["Kiselev Nikolay <ceo@machineand.me>"]

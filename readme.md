@@ -4,6 +4,71 @@ Sneact is a python library for building user interfaces.
 
 __That's so draft.__
 
+
+## Hot new features!
+
+### Conditions!
+
+```python
+from sneact import Sneact, s, _
+from sneact.cond import when, when_not, then
+from sneact.html import div, p
+
+scope = {
+    "ok_text": "Hello!",
+    "not_text": "Hello not!",
+    "show_text": True
+}
+page = (+Sneact(scope)
+    <<div>>_
+        @when(s.show_text, +then
+            <<p>> s.ok_text <<-p>>_
+        )
+        @when_not(s.show_text, +then
+            <<p>> s.not_text <<-p>>_
+        )
+        <<img(src=s.image)>>_
+    <<-div>>_
+)
+```
+
+##### Result:
+
+```html
+<div>
+<p>Hello!</p>
+</div>
+```
+
+### Loops!
+
+```python
+from sneact import Sneact, s, _
+from sneact.html import div, img
+from sneact.loop import for_each, do, item
+
+scope = {
+    "images": ["cat.png", "dog.png", "frog.png"]
+}
+page = (+Sneact(scope)
+    <<div>>_
+        @for_each(s.images, +do
+            <<img(src=item)>>_
+        )
+    <<-div>>_
+)
+```
+
+##### Result:
+
+```html
+<div>
+<img src=cat.png>
+<img src=dog.png>
+<img src=frog.png>
+</div>
+```
+
 ## Example 1
 
 ### Python code
