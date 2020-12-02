@@ -27,7 +27,6 @@ page = (+Sneact(scope)
         @when_not(s.show_text, +then
             <<p>> s.not_text <<-p>>_
         )
-        <<img(src=s.image)>>_
     <<-div>>_
 )
 ```
